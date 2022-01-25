@@ -54,28 +54,28 @@ for ($num = 0 ; $num -le $count ; $num++) {
     If (((($tempAR[$num]).conditions).Users).IncludeGroups -ne '') {
         If (((($tempAR[$num]).conditions).Users).IncludeGroups -ne 'All') {
             $UserIncludeGroupsName = Get-AzureADObjectByObjectId -ObjectIds ((($tempAR[$num]).conditions).Users).IncludeGroups
-            $UserIncludeGroupsName = ($UserIncludeGroupsName).UserPrincipalName -join ","
+            $UserIncludeGroupsName = ($UserIncludeGroupsName).DisplayName -join ","
         }
     }
     $UserExcludeGroups = ((($tempAR[$num]).conditions).Users).ExcludeGroups -join ','
     If (((($tempAR[$num]).conditions).Users).ExcludeGroups -ne '') {
         If (((($tempAR[$num]).conditions).Users).ExcludeGroups -ne 'All') {
             $UserExcludeGroupsName = Get-AzureADObjectByObjectId -ObjectIds ((($tempAR[$num]).conditions).Users).ExcludeGroups
-            $UserExcludeGroupsName = ($UserExcludeGroupsName).UserPrincipalName -join ","
+            $UserExcludeGroupsName = ($UserExcludeGroupsName).DisplayName -join ","
         }
     }
     $UserIncludeRoles = ((($tempAR[$num]).conditions).Users).IncludeRoles -join ','
     If (((($tempAR[$num]).conditions).Users).IncludeRoles -ne '') {
         If (((($tempAR[$num]).conditions).Users).IncludeRoles -ne 'All') {
             $UserIncludeRolesName = Get-AzureADObjectByObjectId -ObjectIds ((($tempAR[$num]).conditions).Users).IncludeRoles
-            $UserIncludeRolesName = ($UserIncludeRolesName).UserPrincipalName -join ","
+            $UserIncludeRolesName = ($UserIncludeRolesName).DisplayName-join ","
         }
     }
     $UserExcludeRoles = ((($tempAR[$num]).conditions).Users).ExcludeRoles -join ','
     If (((($tempAR[$num]).conditions).Users).ExcludeRoles -ne '') {
         If (((($tempAR[$num]).conditions).Users).ExcludeRoles -ne 'All') {
             $UserExcludeRolesName = Get-AzureADObjectByObjectId -ObjectIds ((($tempAR[$num]).conditions).Users).ExcludeRoles
-            $UserExcludeRolesName = ($UserExcludeRolesName).UserPrincipalName -join ","
+            $UserExcludeRolesName = ($UserExcludeRolesName).DisplayName -join ","
         }
     }        
     $PlatformIncludePlatforms = ((($tempAR[$num]).conditions).Platforms).IncludePlatforms -join ','
