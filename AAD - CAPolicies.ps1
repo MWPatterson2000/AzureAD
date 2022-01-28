@@ -14,8 +14,11 @@ $exportFile = "C:\Temp\$(Get-Date -Format yyyy-MM-dd-HH-mm) - AAD - CA Policies.
 
 #Get Conditional Access Policies
 $tempAR = @(Get-AzureADMSConditionalAccessPolicy)
+
 # Build Array for output
-$Script:CAPolicies = @()
+#$Script:CAPolicies = @()
+$Script:CAPolicies = [System.Collections.ArrayList]::new()
+
 # Build Export Array
 $count = @(($tempAR).Displayname).Count
 $count = $count - 1
@@ -97,7 +100,8 @@ for ($num = 0 ; $num -le $count ; $num++) {
     $SignInFrequencyType = ((($tempAR[$num]).SessionControls).SignInFrequency).Type -join ','
     $SignInFrequencyValue = ((($tempAR[$num]).SessionControls).SignInFrequency).Value -join ','
 
-    $Script:CAPolicies += New-Object PSobject -Property @{
+    #$Script:CAPolicies += New-Object PSobject -Property @{
+    $CAPoliciesT = New-Object PSobject -Property @{
         "Displayname" = $Displayname
         "State" = $State
         "ID" = $ID
@@ -145,7 +149,8 @@ for ($num = 0 ; $num -le $count ; $num++) {
         "SignInFrequencyType" = $SignInFrequencyType
         "SignInFrequencyValue"  = $SignInFrequencyValue
     }
+    [void]$Script:CAPolicies.Add($CAPoliciesT)
 }
 
 # Export Data
-$CAPolicies | export-csv -Path $exportFile -NoTypeInformation
+$Script:CAPolicies | export-csv -Path $exportFile -NoTypeInformation
