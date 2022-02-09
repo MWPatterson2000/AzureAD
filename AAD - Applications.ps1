@@ -23,19 +23,27 @@ $Script:AADApplications = [System.Collections.ArrayList]::new()
 $count = @(($tempAR).Displayname).Count
 $count = $count - 1
 for ($num = 0 ; $num -le $count ; $num++) {
-    $Displayname = ($tempAR[$num]).displayName #-join ','
+    $Displayname = ($tempAR[$num]).displayName
     $ObjectId = ($tempAR[$num]).ObjectId
     $AppId = ($tempAR[$num]).AppId
-    $DeletionTimestamp = ($tempAR[$num]).DeletionTimestamp #-join ','
-    $AddIns = ($tempAR[$num]).AddIns -join ',' #Need Additional Info
-    $AllowGuestsSignIn = ($tempAR[$num]).AllowGuestsSignIn #-join ','
-    $AllowPassthroughUsers = ($tempAR[$num]).AllowPassthroughUsers #-join ','
-    $AppLogoUrl = ($tempAR[$num]).AppLogoUrl #-join ','
-    $AppRoles = ($tempAR[$num]).AppRoles #-join ','  #Need Additional Info
-    $AvailableToOtherTenants = ($tempAR[$num]).AvailableToOtherTenants #-join ','
-    $ErrorUrl = ($tempAR[$num]).ErrorUrl #-join ','
-    $GroupMembershipClaims = ($tempAR[$num]).GroupMembershipClaims #-join ','
-    $Homepage = ($tempAR[$num]).Homepage #-join ','
+    $DeletionTimestamp = ($tempAR[$num]).DeletionTimestamp
+    #$AddIns = ($tempAR[$num]).AddIns -join ',' 
+    $AddInsId = (($tempAR[$num]).AddIns).Id -join ',' 
+    $AddInsType = (($tempAR[$num]).AddIns).Type -join ',' 
+    $AddInsProperties = (($tempAR[$num]).AddIns).Properties -join ',' 
+    $AllowGuestsSignIn = ($tempAR[$num]).AllowGuestsSignIn -join ','
+    $AllowPassthroughUsers = ($tempAR[$num]).AllowPassthroughUsers -join ','
+    $AppLogoUrl = ($tempAR[$num]).AppLogoUrl -join ','
+    #$AppRoles = ($tempAR[$num]).AppRoles #-join ','
+    $AppRolesDescription = (($tempAR[$num]).AppRoles).Description -join ','
+    $AppRolesDisplayName = (($tempAR[$num]).AppRoles).DisplayName -join ','
+    $AppRolesId = (($tempAR[$num]).AppRoles).Id -join ','
+    $AppRolesIsEnabled = (($tempAR[$num]).AppRoles).IsEnabled -join ','
+    $AppRolesValue = (($tempAR[$num]).AppRoles).Value -join ','
+    $AvailableToOtherTenants = ($tempAR[$num]).AvailableToOtherTenants -join ','
+    $ErrorUrl = ($tempAR[$num]).ErrorUrl -join ','
+    $GroupMembershipClaims = ($tempAR[$num]).GroupMembershipClaims -join ','
+    $Homepage = ($tempAR[$num]).Homepage -join ','
     $IdentifierUris = ($tempAR[$num]).IdentifierUris -join ','
     #$InformationalUrls = ($tempAR[$num]).InformationalUrls #-join ','
     $InformationalUrlsTermsOfService = (($tempAR[$num]).InformationalUrls).TermsOfService -join ','
@@ -43,7 +51,7 @@ for ($num = 0 ; $num -le $count ; $num++) {
     $InformationalUrlsPrivacy = (($tempAR[$num]).InformationalUrls).Privacy -join ','
     $InformationalUrlsSupport = (($tempAR[$num]).InformationalUrls).Support -join ','
     $IsDeviceOnlyAuthSupported = ($tempAR[$num]).IsDeviceOnlyAuthSupported -join ','
-    $IsDisabled = ($tempAR[$num]).IsDisabled #-join ','
+    $IsDisabled = ($tempAR[$num]).IsDisabled -join ','
     #$KeyCredentials = ($tempAR[$num]).KeyCredentials #-join ','
     $KeyCredentialsEndDate = (($tempAR[$num]).KeyCredentials).EndDate -join ','
     $KeyCredentialsKeyId = (($tempAR[$num]).KeyCredentials).KeyId -join ','
@@ -52,9 +60,9 @@ for ($num = 0 ; $num -le $count ; $num++) {
     $KeyCredentialsUsage = (($tempAR[$num]).KeyCredentials).Usage -join ','
     $KeyCredentialsValue = (($tempAR[$num]).KeyCredentials).Value -join ','
     $KnownClientApplications = ($tempAR[$num]).KnownClientApplications -join ',' #Need Additional Info
-    $LogoutUrl = ($tempAR[$num]).LogoutUrl #-join ','
-    $Oauth2AllowImplicitFlow = ($tempAR[$num]).Oauth2AllowImplicitFlow #-join ','
-    $Oauth2AllowUrlPathMatching = ($tempAR[$num]).Oauth2AllowUrlPathMatching #-join ','
+    $LogoutUrl = ($tempAR[$num]).LogoutUrl -join ','
+    $Oauth2AllowImplicitFlow = ($tempAR[$num]).Oauth2AllowImplicitFlow -join ','
+    $Oauth2AllowUrlPathMatching = ($tempAR[$num]).Oauth2AllowUrlPathMatching -join ','
     #$Oauth2Permissions = ($tempAR[$num]).Oauth2Permissions #-join ','
     $Oauth2PermissionsAdminConsentDescription = (($tempAR[$num]).Oauth2Permissions).AdminConsentDescription -join ','
     $Oauth2PermissionsAdminConsentDisplayName = (($tempAR[$num]).Oauth2Permissions).AdminConsentDisplayName -join ','
@@ -66,7 +74,7 @@ for ($num = 0 ; $num -le $count ; $num++) {
     $Oauth2PermissionsValue = (($tempAR[$num]).Oauth2Permissions).Value -join ','
     $Oauth2RequirePostResponse = ($tempAR[$num]).Oauth2RequirePostResponse -join ','
     $OrgRestrictions = ($tempAR[$num]).OrgRestrictions #-join ',' #Need Additional Info
-    $OptionalClaims = ($tempAR[$num]).OptionalClaims #-join ','
+    $OptionalClaims = ($tempAR[$num]).OptionalClaims -join ','
     #$ParentalControlSettings = ($tempAR[$num]).ParentalControlSettings #-join ','
     $ParentalControlSettingsCountriesBlockedForMinors = (($tempAR[$num]).ParentalControlSettings).CountriesBlockedForMinors -join ','
     $ParentalControlSettingsLegalAgeGroupRule = (($tempAR[$num]).ParentalControlSettings).LegalAgeGroupRule -join ','
@@ -82,63 +90,13 @@ for ($num = 0 ; $num -le $count ; $num++) {
     $RecordConsentConditions = ($tempAR[$num]).RecordConsentConditions -join ','
     $ReplyUrls = ($tempAR[$num]).ReplyUrls -join ','
     #$RequiredResourceAccess = ($tempAR[$num]).RequiredResourceAccess #-join ','
-    $RequiredResourceAccessResourceAppId = (($tempAR[$num]).RequiredResourceAccess).ResourceAppId #-join ','
-    $RequiredResourceAccessResourceAccess = (($tempAR[$num]).RequiredResourceAccess).ResourceAccess #-join ','
-    $SamlMetadataUrl = ($tempAR[$num]).SamlMetadataUrl #-join ','
-    $SignInAudience = ($tempAR[$num]).SignInAudience #-join ','
-    $WwwHomepage = ($tempAR[$num]).WwwHomepage #-join ','
+    $RequiredResourceAccessResourceAppId = (($tempAR[$num]).RequiredResourceAccess).ResourceAppId -join ','
+    $RequiredResourceAccessResourceAccess = (($tempAR[$num]).RequiredResourceAccess).ResourceAccess -join ','
+    $SamlMetadataUrl = ($tempAR[$num]).SamlMetadataUrl -join ','
+    $SignInAudience = ($tempAR[$num]).SignInAudience -join ','
+    $WwwHomepage = ($tempAR[$num]).WwwHomepage -join ','
     #$ = ($tempAR[$num]). #-join ','
     <#
-    $State = ($tempAR[$num]).state -join ','
-    $ID  = ($tempAR[$num]).id -join ','
-    $createdDateTime = ($tempAR[$num]).createdDateTime -join ','
-    $ModifiedDateTime  = ($tempAR[$num]).ModifiedDateTime -join ','
-    $sessionControls = ($tempAR[$num]).sessionControls -join ','
-    $userRiskLevels = (($tempAR[$num]).conditions).userRiskLevels -join ','
-    $signInRiskLevels = (($tempAR[$num]).conditions).signInRiskLevels -join ','
-    $clientAppTypes = (($tempAR[$num]).conditions).clientAppTypes -join ','
-    $deviceStates = (($tempAR[$num]).conditions).deviceStates -join ','
-    $devices = (($tempAR[$num]).conditions).devices -join ','
-    $clientApplications = (($tempAR[$num]).conditions).clientApplications -join ','
-    $ApplicationIncludeApplications = ((($tempAR[$num]).conditions).Applications).IncludeApplications -join ','
-    $ApplicationExcludeApplications = ((($tempAR[$num]).conditions).Applications).ExcludeApplications -join ','
-    $ApplicationIncludeUserActions = ((($tempAR[$num]).conditions).Applications).IncludeUserActions -join ','
-    $ApplicationIncludeAuthenticationContextClassReferences = ((($tempAR[$num]).conditions).Applications).includeAuthenticationContextClassReferences -join ','
-    $UserIncludeUsers = ((($tempAR[$num]).conditions).Users).IncludeUsers -join ','
-    If (((($tempAR[$num]).conditions).Users).IncludeUsers -ne '') {
-        If (((($tempAR[$num]).conditions).Users).IncludeUsers -ne 'All') {
-            $UserIncludeUsersName = Get-AzureADObjectByObjectId -ObjectIds ((($tempAR[$num]).conditions).Users).IncludeUsers
-            $UserIncludeUsersName = ($UserIncludeUsersName).UserPrincipalName -join ","
-        }
-    }
-    $UserExcludeUsers = ((($tempAR[$num]).conditions).Users).ExcludeUsers -join ','
-    If (((($tempAR[$num]).conditions).Users).ExcludeUsers -ne '') {
-        If (((($tempAR[$num]).conditions).Users).ExcludeUsers -ne 'All') {
-            $UserExcludeUsersName = Get-AzureADObjectByObjectId -ObjectIds ((($tempAR[$num]).conditions).Users).ExcludeUsers
-            $UserExcludeUsersName = ($UserExcludeUsersName).UserPrincipalName -join ","
-        }
-    }
-    $UserIncludeGroups = ((($tempAR[$num]).conditions).Users).IncludeGroups -join ','
-    If (((($tempAR[$num]).conditions).Users).IncludeGroups -ne '') {
-        If (((($tempAR[$num]).conditions).Users).IncludeGroups -ne 'All') {
-            $UserIncludeGroupsName = Get-AzureADObjectByObjectId -ObjectIds ((($tempAR[$num]).conditions).Users).IncludeGroups
-            $UserIncludeGroupsName = ($UserIncludeGroupsName).DisplayName -join ","
-        }
-    }
-    $UserExcludeGroups = ((($tempAR[$num]).conditions).Users).ExcludeGroups -join ','
-    If (((($tempAR[$num]).conditions).Users).ExcludeGroups -ne '') {
-        If (((($tempAR[$num]).conditions).Users).ExcludeGroups -ne 'All') {
-            $UserExcludeGroupsName = Get-AzureADObjectByObjectId -ObjectIds ((($tempAR[$num]).conditions).Users).ExcludeGroups
-            $UserExcludeGroupsName = ($UserExcludeGroupsName).DisplayName -join ","
-        }
-    }
-    $UserIncludeRoles = ((($tempAR[$num]).conditions).Users).IncludeRoles -join ','
-    If (((($tempAR[$num]).conditions).Users).IncludeRoles -ne '') {
-        If (((($tempAR[$num]).conditions).Users).IncludeRoles -ne 'All') {
-            $UserIncludeRolesName = Get-AzureADObjectByObjectId -ObjectIds ((($tempAR[$num]).conditions).Users).IncludeRoles
-            $UserIncludeRolesName = ($UserIncludeRolesName).DisplayName-join ","
-        }
-    }
     $UserExcludeRoles = ((($tempAR[$num]).conditions).Users).ExcludeRoles -join ','
     If (((($tempAR[$num]).conditions).Users).ExcludeRoles -ne '') {
         If (((($tempAR[$num]).conditions).Users).ExcludeRoles -ne 'All') {
@@ -146,24 +104,6 @@ for ($num = 0 ; $num -le $count ; $num++) {
             $UserExcludeRolesName = ($UserExcludeRolesName).DisplayName -join ","
         }
     }        
-    $PlatformIncludePlatforms = ((($tempAR[$num]).conditions).Platforms).IncludePlatforms -join ','
-    $PlatformExcludePlatforms = ((($tempAR[$num]).conditions).Platforms).ExcludePlatforms -join ','
-    $LocationIncludeLocations = ((($tempAR[$num]).conditions).Locations).IncludeLocations -join ','
-    $LocationExcludeLocations = ((($tempAR[$num]).conditions).Locations).ExcludeLocations -join ','
-    $DeviceStateIncludeStates = ((($tempAR[$num]).conditions).DeviceState).IncludeStates -join ','
-    $DeviceStateExcludeStates = ((($tempAR[$num]).conditions).DeviceState).ExcludeStates -join ','
-    $GrantControlOperator = (($tempAR[$num]).GrantControls).Operator -join ','
-    $GrantControlBuiltInControls = (($tempAR[$num]).GrantControls).BuiltInControls -join ','
-    $GrantControlCustomAuthenticationFactors = (($tempAR[$num]).GrantControls).CustomAuthenticationFactors -join ','
-    $GrantControlTermsOfUse = (($tempAR[$num]).GrantControls).TermsOfUse -join ','
-    $ApplicationEnforcedRestrictions = ((($tempAR[$num]).SessionControls).ApplicationEnforcedRestrictions).IsEnabled -join ','
-    $CloudAppSecurityIsEnabled = ((($tempAR[$num]).SessionControls).CloudAppSecurity).IsEnabled -join ','
-    $CloudAppSecurityCloudAppSecurityType = ((($tempAR[$num]).SessionControls).CloudAppSecurity).CloudAppSecurityType -join ','
-    $PersistentBrowserIsEnabled = ((($tempAR[$num]).SessionControls).PersistentBrowser).IsEnabled -join ','
-    $PersistentBrowserMode = ((($tempAR[$num]).SessionControls).PersistentBrowser).Mode -join ','
-    $SignInFrequencyIsEnabled = ((($tempAR[$num]).SessionControls).SignInFrequency).IsEnabled -join ','
-    $SignInFrequencyType = ((($tempAR[$num]).SessionControls).SignInFrequency).Type -join ','
-    $SignInFrequencyValue = ((($tempAR[$num]).SessionControls).SignInFrequency).Value -join ','
     #>
 
     #$Script:AADApplications += New-Object PSobject -Property @{
@@ -172,11 +112,19 @@ for ($num = 0 ; $num -le $count ; $num++) {
         "ObjectId" = $ObjectId
         "AppId" = $AppId
         "DeletionTimestamp" = $DeletionTimestamp
-        "AddIns" = $AddIns
+        #"AddIns" = $AddIns
+        "AddIns Id" = $AddInsId
+        "AddIns Type" = $AddInsType
+        "AddIns Properties" = $AddInsProperties
         "AllowGuestsSignIn" = $AllowGuestsSignIn
         "AllowPassthroughUsers" = $AllowPassthroughUsers
         "AppLogoUrl" = $AppLogoUrl
-        "AppRoles" = $AppRoles
+        #"AppRoles" = $AppRoles
+        "AppRoles Description" = $AppRolesDescription
+        "AppRoles DisplayName" = $AppRolesDisplayName
+        "AppRoles Id" = $AppRolesId
+        "AppRoles IsEnabled" = $AppRolesIsEnabled
+        "AppRoles Value" = $AppRolesValue
         "AvailableToOtherTenants" = $AvailableToOtherTenants
         "ErrorUrl" = $ErrorUrl
         "GroupMembershipClaims" = $GroupMembershipClaims
