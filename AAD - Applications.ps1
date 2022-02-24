@@ -13,7 +13,8 @@
 $exportFile = "C:\Temp\$(Get-Date -Format yyyy-MM-dd-HH-mm) - AAD - Applications.csv"
 
 #Get Conditional Access Policies
-$tempAR = @(Get-AzureADApplication)
+#$tempAR = @(Get-AzureADApplication)
+$tempAR = @(Get-AzureADApplication -All $true)
 
 # Build Array for output
 #$Script:AADApplications = @()
